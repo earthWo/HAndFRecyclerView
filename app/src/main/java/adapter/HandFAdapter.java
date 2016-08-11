@@ -108,4 +108,9 @@ public class HandFAdapter extends RecyclerView.Adapter {
             super(itemView);
         }
     }
+
+
+    public boolean isHeaderOrFooter(int position){
+        return position<headerViewList.size()||position>=headerViewList.size()+getInnerAdapterItemCount();
+    }
 }

@@ -2,7 +2,9 @@ package model;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.View;
 import adapter.HandFAdapter;
@@ -32,10 +34,10 @@ public class HandFRecyclerView extends RecyclerView {
         adapter=new HandFAdapter();
     }
 
-   public void setHeaderView(int id){
-       if(adapter==null){
-           init();
-       }
+    public void setHeaderView(int id){
+        if(adapter==null){
+            init();
+        }
         adapter.addHeaderView(id,getContext(),this);
     }
 
@@ -66,6 +68,22 @@ public class HandFRecyclerView extends RecyclerView {
     public void setAdapter(Adapter adapter){
         this.adapter.setInnerAdapter(adapter);
         super.setAdapter(this.adapter);
+    }
+
+
+    public void setLayoutManager(final LayoutManager layoutManager){
+        if(layoutManager!=null&&layoutManager instanceof GridLayoutManager){
+            ((GridLayoutManager)layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if(adapter!=null) {
+                        return adapter.isHeaderOrFooter(position)?((GridLayoutManager)layoutManager).getSpanCount():1;
+                    }
+                    return 1;
+                }
+            });
+        }
+        super.setLayoutManager(layoutManager);
     }
 
 

@@ -1,9 +1,12 @@
 package com.orange.handfrecyclerview;
 
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         HandFRecyclerView recyclerView= (HandFRecyclerView) findViewById(R.id.recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         recyclerView.setHeaderView(R.layout.header);
 
         ImageView  headerView= (ImageView) LayoutInflater.from(this).inflate(R.layout.header,recyclerView,false);
